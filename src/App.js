@@ -1,25 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react'
+import PostList from './PostList'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const link='https://dog.ceo/api/breeds/image/random/3'
+const App = () => {
+    
+    const [image1 ,setImage1]=useState([])
+   
+    const image=[]
+
+
+    const fetchDAta =async()=>{
+      
+        const res=await fetch(`${link}`)
+        
+        const data= await res.json()
+        console.log(data)
+
+        // image.push(data)
+        setImage1(data)
+        console.log(image1)
+// console.log(image)
+
+        // console.log(image1)
+
+    }
+    useEffect(()=>{
+
+        fetchDAta()
+        fetchDAta()
+        // fetchDAta()
+
+        
+    
+
+
+    }
+    ,[])
+    
+    // console.log(image1)l;
+    return (
+         <div style={{backgroundColor: "black"}}>
+            
+
+            {image1 && <PostList post={image1} />}
+
+           
+
+        </div>
+    )
 }
 
-export default App;
+export default App
